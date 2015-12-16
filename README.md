@@ -15,15 +15,16 @@ Feel free to contact us for details and informations (usage, bugs, etc) at conta
 ## Documentation
 
 
-  bower install
-  npm install
-  
-  cd js/osmbuildings-smartorigin
-  npm install
-  cd build
-  . build.sh
-  cd ../..
-  grunt serve
+    bower install
+    npm install
+    
+    cd js/osmbuildings-smartorigin
+    git checkout origin/so/arcgis
+    npm install
+    cd build
+    . build.sh
+    cd ../..
+    grunt serve
 
 ## Contact
 
