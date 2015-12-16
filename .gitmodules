@@ -1,0 +1,3 @@
+[submodule "js/osmbuildings-smartorigin"]
+	path = js/osmbuildings-smartorigin
+	url = https://github.com/smartorigin/osmbuildings.git

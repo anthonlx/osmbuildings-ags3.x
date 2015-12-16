@@ -1,0 +1,6 @@
+{
+  "name": "app",
+  "description": "OSM Buildings sample application for ArcGIS 3.X",
+  "version": "1.0",
+  "dojoBuild": "package.js"
+}
