@@ -44,7 +44,11 @@ var profile = {
     'dgrid',
     'xstyle',
     'put-selector',
-    'esri'
+    'esri',
+    {name:'osmb-so', location:'osmbuildings-smartorigin/dist', trees: [
+      // don't bother with .hidden, tests and txt.
+      [".", ".", /(\/\.)|(~$)|(js.gz|.debug.js)/]
+    ]}
   ],
 
   // Build source map files to aid in debugging.
@@ -87,7 +91,8 @@ var profile = {
         'esri/dijit/Attribution'
       ],
       // You can define the locale for your application if you like
-      includeLocales: ['en-us']
+      includeLocales: ['en-us'],
+      exclude:['osmb-so/OSMBuildings-ExternalInterface']
     }
   },
   // Providing hints to the build system allows code to be conditionally removed on a more granular level than simple
@@ -145,7 +150,8 @@ var profile = {
     hasCache: {
       'extend-esri': 0,
       'dojo-has-api': 1,
-      'dojo-undef-api': 0
+      'dojo-undef-api': 0,
+      'esri-3x': 1
     }
   }
 };

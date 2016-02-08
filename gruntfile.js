@@ -18,30 +18,31 @@ module.exports = function (grunt)
                      },
                      copy : {
                        main: {
-                         files: [{
-                           expand: true,
-                           cwd   : 'src/',
-                           src   : ['built.html'],
-                           dest  : './dist/',
-                           rename: function (dest, src)
-                           {
-                             return dest + 'index.html';
-                           }
-                         }]
+
+                         cwd : './',
+                         src   : './build.html',
+                         dest  : './dist/index.html'
+
+                       },
+                       osmbuild:{
+                         expand:true,
+                         cwd : './js/osmbuildings-smartorigin/dist/',
+                         src:'OSMBuildings-ExternalInterface.js',
+                         dest  : './dist/js/osmb-so/'
                        }
                      },
                      dojo : {
                        dist   : {
                          options: {
-                           releaseDir: '../dist',
+                           releaseDir: '../dist/js'
                          }
                        },
                        options: {
                          profile : 'build.profile.js',
-                         dojo    : 'src/dojo/dojo.js',
+                         dojo    : 'js/dojo/dojo.js',
                          load    : 'build',
                          cwd     : './',
-                         basePath: './src'
+                         basePath: './js'
                        }
                      },
 
@@ -57,6 +58,6 @@ module.exports = function (grunt)
                      }
                    });
 
-  grunt.registerTask('build', ['clean:build', 'dojo', 'copy', 'clean:uncompressed']);
+  grunt.registerTask('build', ['clean:build', 'dojo', 'copy', 'copy:osmbuild', 'clean:uncompressed']);
   grunt.registerTask('serve', ['browserSync']);
 };
