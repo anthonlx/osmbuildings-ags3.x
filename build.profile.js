@@ -64,7 +64,7 @@ var profile = {
     },
     {name:'osmb-so', location:'osmbuildings-smartorigin/dist', trees: [
       // don't bother with .js.gz, debug.js
-      [".", ".", /(\/\.)|(~$)|(js.gz|.debug.js)/]
+      [".", ".", /(\/\.)|(~$)|(js.gz|.debug.js|OL3|OpenLayers|Leaflet)/]
     ],
       resourceTags:{
         amd:function(filename, mid){
