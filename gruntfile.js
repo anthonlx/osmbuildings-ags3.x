@@ -14,6 +14,21 @@ module.exports = function (grunt)
                          src: [
                            'dist/**/*.uncompressed.js'
                          ]
+                       },
+                       deploy: {
+                         src: [
+                           //Remove compiled librairies
+                           'dist/js/dgrid/', 'dist/js/dojo/*', '!dist/js/dojo/dojo.*', '!dist/js/dojo/nls/**', '!dist/js/dojo/resources/**', '!dist/js/dojo/LICENSE',
+                           'dist/js/dijit/*', '!dist/js/dijit/themes/nihilo/**',
+                           'dist/js/dojox/', 'dist/js/dstore/', 'dist/js/put-selector/', 'dist/js/xstyle/', 'dist/js/moment/',
+                           //Clean so
+                           'dist/js/app', 'dist/js/osmb-so'
+                           //TODO
+                           /*,
+                           //Clean other compilation things
+                            'dist/js/esri/*', '!dist/js/esri/css/**', '!dist/js/esri/dijit/**', '!dist/js/esri/dijit/images/**', '!dist/js/esri/images/**', '!dist/js/esri/layers/VectorTileLayerImpl.js', '!dist/js/esri/layers/vectorTiles/core/workers/**'
+                            */
+                         ]
                        }
                      },
                      copy : {

@@ -9,6 +9,10 @@
  */
 
 var profile = {
+
+  insertAbsMids: 0,
+  internStrings: true,
+
   // `basePath` is relative to the directory containing this profile file; in this case, it is being set to the
   // src/ directory, which is the same place as the `baseUrl` directory in the loader configuration.
   basePath: './js',
@@ -44,11 +48,30 @@ var profile = {
     'dgrid',
     'xstyle',
     'put-selector',
-    'esri',
+    'esri', {
+      name: 'moment',
+      location: 'moment',
+      main: 'moment',
+      trees: [
+        // don't bother with .hidden, tests, min, src, and templates
+        [".", ".", /(\/\.)|(~$)|(test|txt|src|min|templates)/]
+      ],
+      resourceTags: {
+        amd: function(filename, mid){
+          return /\.js$/.test(filename);
+        }
+      }
+    },
     {name:'osmb-so', location:'osmbuildings-smartorigin/dist', trees: [
-      // don't bother with .hidden, tests and txt.
+      // don't bother with .js.gz, debug.js
       [".", ".", /(\/\.)|(~$)|(js.gz|.debug.js)/]
-    ]}
+    ],
+      resourceTags:{
+        amd:function(filename, mid){
+          return /\.js$/.test(filename);
+        }
+      }
+    }
   ],
 
   // Build source map files to aid in debugging.
@@ -87,12 +110,20 @@ var profile = {
         // dependencies of esri/map that will be requested if not included
         'dojox/gfx/path',
         'dojox/gfx/svg',
+        'dojox/gfx/filters',
+        'dojox/gfx/svgext',
         'dojox/gfx/shape',
-        'esri/dijit/Attribution'
+        'esri/dijit/Attribution',
+        'esri/IdentityManager'
       ],
       // You can define the locale for your application if you like
-      includeLocales: ['en-us'],
-      exclude:['osmb-so/OSMBuildings-ExternalInterface']
+      includeLocales: ['en-us']
+    },
+    'esri/layers/VectorTileLayerImpl': {
+      include: [
+        'esri/layers/VectorTileLayerImpl'
+      ],
+      includeLocales: ['en-us']
     }
   },
   // Providing hints to the build system allows code to be conditionally removed on a more granular level than simple
@@ -152,6 +183,11 @@ var profile = {
       'dojo-has-api': 1,
       'dojo-undef-api': 0,
       'esri-3x': 1
-    }
+    },
+    packages: [{
+      name: 'moment',
+      location: 'moment',
+      main: 'moment'
+    }]
   }
 };

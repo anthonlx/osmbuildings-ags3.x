@@ -1,7 +1,6 @@
 /**
- * Created by tony on 16/12/2015.
  *
- * @copyright (c)2015, Smart Origin SARL
+ * @copyright (c)2016, Smart Origin SARL
  * @license
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,29 +21,34 @@
  * SOFTWARE.
  */
 define([
-         "esri/map",
-         "osmb-so/OSMBuildingsLayerForArcGIS",
-         "dojo/domReady!"
-       ], function (
-  Map, OSMBuildingsLayerForArcGIS
-)
+  "esri/map",
+  "osmb-so/OSMBuildingsLayerForArcGIS",
+  "esri/layers/VectorTileLayer",
+  "dojo/domReady!"
+], function (Map, OSMBuildingsLayerForArcGIS, VectorTileLayer)
 {
-  //Create map
-  var map = new Map("map-area", {
-    basemap: "streets",
-    center: [5.72909, 45.18968],
-    zoom:20
-  });
-  //Add layer OSMBuildings when map load
-  map.on('load', function() {
-    try
-    {
-      map.addLayer(new OSMBuildingsLayerForArcGIS());
-    }
-    catch(error)
-    {
-      console.error('Unable to add OSMBuildings layer', error);
-    }
+  try
+  {
+    //Create map
+    var map = new Map("map-area", {
+      center: [2.1233095, 48.8026876],//[2.339,48.857],//[5.72909, 45.18968],
+      zoom  : 20
+    });
 
-  });
+
+    //Add basemap
+    var vtl = new VectorTileLayer("https://www.arcgis.com/sharing/rest/content/items/dcbbba0edf094eaa81af19298b9c6247/resources/styles/root.json");
+
+    map.addLayer(vtl);
+    vtl.on('load', function ()
+    {
+      map.addLayer(new OSMBuildingsLayerForArcGIS(null, {minZoom: 16}));
+    });
+
+  }
+  catch (error)
+  {
+    console.error('[Main] Unable to add OSMBuildings layer', error);
+  }
+
 });
